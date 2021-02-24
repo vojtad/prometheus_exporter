@@ -27,6 +27,8 @@ module PrometheusExporter::Server
     end
 
     def process(str)
+      pp ['process', str]
+
       process_hash(@json_serializer.parse(str))
     end
 
