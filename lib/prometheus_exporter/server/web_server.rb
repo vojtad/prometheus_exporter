@@ -84,7 +84,7 @@ module PrometheusExporter::Server
       @sessions_total.observe
       req.body do |block|
         begin
-          STDERR.puts('handle_metrics, X, ' + block.size)
+          STDERR.puts('handle_metrics, X, ' + block.size.to_s)
 
           @metrics_total.observe
           @collector.process(block)
