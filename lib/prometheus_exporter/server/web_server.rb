@@ -80,9 +80,12 @@ module PrometheusExporter::Server
     end
 
     def handle_metrics(req, res)
+      STDERR.puts('handle_metrics, A')
       @sessions_total.observe
       req.body do |block|
         begin
+          STDERR.puts('handle_metrics, X, ' + block.size)
+
           @metrics_total.observe
           @collector.process(block)
         rescue => e
@@ -98,6 +101,7 @@ module PrometheusExporter::Server
           return
         end
       end
+      STDERR.puts('handle_metrics, B')
 
       res.body = "OK"
       res.status = 200
