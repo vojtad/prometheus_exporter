@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'pp'
+
 module PrometheusExporter::Server
 
   class Collector < CollectorBase
@@ -27,7 +29,7 @@ module PrometheusExporter::Server
     end
 
     def process(str)
-      pp ['process', str]
+      PP.pp(STDERR, ['process', str])
 
       process_hash(@json_serializer.parse(str))
     end
