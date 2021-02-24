@@ -5,6 +5,8 @@ require 'timeout'
 require 'zlib'
 require 'stringio'
 
+require 'pp'
+
 module PrometheusExporter::Server
   class WebServer
     attr_reader :collector
@@ -85,6 +87,7 @@ module PrometheusExporter::Server
       req.body do |block|
         begin
           STDERR.puts('handle_metrics, X, ' + block.size.to_s)
+          PP.pp(req.header, STDERR)
 
           @metrics_total.observe
           @collector.process(block)
