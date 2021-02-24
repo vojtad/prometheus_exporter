@@ -22,6 +22,8 @@ module PrometheusExporter::Server
       register_collector(UnicornCollector.new)
       register_collector(ActiveRecordCollector.new)
       register_collector(ShoryukenCollector.new)
+
+      PP.pp('A', STDERR)
     end
 
     def register_collector(collector)
@@ -29,7 +31,7 @@ module PrometheusExporter::Server
     end
 
     def process(str)
-      PP.pp(STDERR, ['process', str])
+      PP.pp(['process', str], STDERR)
 
       process_hash(@json_serializer.parse(str))
     end
